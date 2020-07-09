@@ -1,3 +1,9 @@
 # Default ignored files
 /shelf/
-/.idea/workspace.xml
+/.idea/
+
+/ReadTitlesNew.iml
+/*.xml
+/*.txt
+/*.srt
+/*.avi
