@@ -1,9 +1,9 @@
 # Default ignored files
-/shelf/
-/.idea/
+shelf/
+.idea/
+build/
+out/
+classes/
 
-/ReadTitlesNew.iml
-/*.xml
-/*.txt
-/*.srt
-/*.avi
+*.iml
+*.class
