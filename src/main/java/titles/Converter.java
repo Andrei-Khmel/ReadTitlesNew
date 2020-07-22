@@ -1,13 +1,13 @@
 package titles;
 
-public class Converter<T> {
-    private final T LINE_CONVERTER;
+public class Converter {
+    private LineConverter lineConverter;
 
-    public Converter(T lineConverter) {
-        LINE_CONVERTER = lineConverter;
+    public Converter(LineConverter lineConverter) {
+        this.lineConverter = lineConverter;
     }
 
-    public T getLineConverter() {
-        return LINE_CONVERTER;
+    public String convert(String line, int shift) {
+        return lineConverter.convert(line, shift);
     }
 }

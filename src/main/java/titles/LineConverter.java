@@ -1,9 +1,5 @@
 package titles;
 
-public class LineConverter {
-    String line;
-
-    public LineConverter(String line) {
-        this.line = line;
-    }
+public interface LineConverter {
+    String convert(String line, int shift);
 }

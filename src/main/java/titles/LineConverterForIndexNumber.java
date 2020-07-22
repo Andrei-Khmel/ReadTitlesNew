@@ -1,14 +1,9 @@
 package titles;
 
-public class LineConverterForIndexNumber extends LineConverter {
-    private final int NEXT_NUMBER;
-
-    public LineConverterForIndexNumber(String line, int nextNumber) {
-        super(line);
-        this.NEXT_NUMBER = nextNumber;
-    }
-    String convert() {
+public class LineConverterForIndexNumber implements LineConverter {
+    @Override
+    public String convert(String line, int nextNumber) {
         int num = Integer.parseInt(line);
-        return String.valueOf(num + NEXT_NUMBER);
+        return String.valueOf(num + nextNumber);
     }
 }

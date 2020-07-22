@@ -1,5 +1,7 @@
 package titles;
 
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import java.util.ArrayList;
 
 public class Main {
@@ -16,20 +18,23 @@ public class Main {
         StringBuilder stringBuilder = new StringBuilder();
 
         for (int i = 0; i < list.size(); i++) {
-            int maxNumberOfDigits = 4;
+            int maxOfIndexDigits = 4;
+            int firstDashOfArrowPosition = 13;
+            ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 
-            if ((list.get(i).startsWith("-->", 13)) &&
+            if ((list.get(i).startsWith("-->", firstDashOfArrowPosition)) &&
                     (StringToSeconds.convertFromStringToSeconds(list.get(i), 0) > startingPointInSeconds)) {
 
-                Converter<LineConverterForTimeCode> converter = new Converter<>(new LineConverterForTimeCode(list.get(i), timeShiftInSeconds));
-                list.set(i, converter.getLineConverter().convert());
+                Converter timeConverter = context.getBean("timeConverter", Converter.class);
+                list.set(i, timeConverter.convert(list.get(i), timeShiftInSeconds));
 
-            } else if (list.get(i).length() < maxNumberOfDigits && list.get(i).matches("\\d+") && indexNumberShift != 0) {
+            } else if (list.get(i).length() < maxOfIndexDigits && list.get(i).matches("\\d+") && indexNumberShift != 0) {
 
-                Converter<LineConverterForIndexNumber> converter = new Converter<>(new LineConverterForIndexNumber(list.get(i), indexNumberShift));
-                list.set(i, converter.getLineConverter().convert());
+                Converter indexConverter = context.getBean("indexConverter", Converter.class);
+                list.set(i, indexConverter.convert(list.get(i), indexNumberShift));
             }
             stringBuilder.append(list.get(i)).append("\n");
+            context.close();
         }
         System.out.println(stringBuilder);
 
